@@ -7,28 +7,28 @@ function getCurrentUnixTime() {
     return Math.floor(Date.now() / 1000);
 }
 
-function clearLine() {
+function writeOnOneLine(data) {
+    console.clear();
     process.stdout.clearLine();
     process.stdout.cursorTo(0);
+    process.stdout.write(data);
 }
 
 function getComand(platform) {
     let command;
     switch (platform) {
       case 'linux':
-        command = unixLikeOSCommand;
-        break;
-      case 'darwin':
+      case 'darwin':      
         command = unixLikeOSCommand;
         break;
       case 'win32':
         command = windowsCommand;
         break;
       default:
-        console.error('Unsupported operating system.');
+        process.stderr.write('Unsupported operating system.');
         return;
     }
     return command;
 }
 
-module.exports = { getCurrentUnixTime, clearLine, getComand, logFileName, windowsCommand, unixLikeOSCommand, timeToRefresh }
+module.exports = { getCurrentUnixTime, writeOnOneLine, getComand, logFileName, windowsCommand, unixLikeOSCommand, timeToRefresh }
